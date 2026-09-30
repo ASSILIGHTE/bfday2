@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Boyfriend Day Grand Prix 🏁 — Happy Boyfriend Day F1 Edition</title>
+  <meta name="description" content="Formula 1 Racing Edition digital interactive experience for Boyfriend Day.">
+
+  <!-- Style & Fonts -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- External CDNs: GSAP, ScrollTrigger, Lenis, Canvas-Confetti -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body class="f1-theme">
+
+  <!-- Chequered Flag Pattern Accent Layer -->
+  <div class="f1-track-grid-pattern"></div>
+
+  <!-- Ambient Racing Glows -->
+  <div class="ambient-glow-container">
+    <div class="ambient-glow glow-red"></div>
+    <div class="ambient-glow glow-amber"></div>
+    <div class="ambient-glow glow-dark"></div>
+  </div>
+
+  <!-- Dynamic Canvas Particles -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Bottom Right Action Controls -->
+  <div class="bottom-right-controls">
+
+    <button id="audio-toggle" class="f1-audio-btn" aria-label="Toggle Background Music">
+      <div class="sound-waves">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <i data-lucide="radio" style="width: 16px; height: 16px;"></i>
+    </button>
+  </div>
+
+  <!-- ===================================================================
+       SECTION 1 — THE HERO SECTION (BOYFRIEND DAY SPECIAL)
+       =================================================================== -->
+  <section id="section-1" class="section hero-section">
+    <div class="section-container-left hero-layout">
+      <!-- Left Hero Content Block -->
+      <div class="hero-content-left">
+        <div class="f1-badge-row">
+          <span class="f1-badge-pill font-mono">SPECIAL EDITION • HAPPY BOYFRIEND DAY 💖</span>
+          <span class="f1-badge-gold font-mono">KAMU SELALU JADI MY FAVORITE PERSON 👑</span>
+        </div>
+        
+        <h1 class="hero-title font-bebas">
+          <span class="text-white-f1">HAPPY</span><br>
+          <span class="text-racing-red">BOYFRIEND DAY</span>
+        </h1>
+
+        <div class="f1-telemetry-bar font-mono">
+          <span class="telemetry-item">DATE: OCT 3, 2026</span>
+          <span class="telemetry-item">STATUS: SELALU IN LOVE WITH YOU 💓</span>
+          <span class="telemetry-item">CHAPTER 1 OF FOREVER 💖</span>
+        </div>
+
+        <p class="hero-quote font-sans">“Happy Boyfriend Day ya sayang! Thank you for always being my comfort zone, selalu bikin bahagia, and making my heart go dug-dug every day 💖✨”</p>
+
+        <div class="hero-actions">
+          <button id="btn-open-letter" class="btn-f1-red">
+            <span>BUKA SURAT • OPEN LETTER 💌</span>
+            <i data-lucide="heart" style="width: 18px; height: 18px;"></i>
+          </button>
+          
+          <button id="btn-play-song" class="btn-f1-outline">
+            <span>PUTAR LAGU • OUR SONG 📻</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Side 3D Interactive Envelope -->
+      <div class="hero-interactive-right">
+        <div class="f1-pit-sticker font-mono">💌 KHUSUS UNTUK MY FAVORITE BOY 💖</div>
+
+        <div id="envelope-wrapper" class="envelope-wrapper" title="Click to open special letter">
+          <div class="envelope-glow-aura"></div>
+          <div id="envelope" class="envelope">
+            <div class="envelope-inside"></div>
+            <div id="envelope-letter" class="envelope-letter">
+              <div class="letter-stamp font-script">💌</div>
+              <p class="letter-preview-heading font-serif">Untuk Pacar Kesayanganku 💖,</p>
+              <p class="letter-preview-text font-mono">A special letter just for you...</p>
+            </div>
+            <div class="envelope-pocket"></div>
+            <div id="envelope-flap-top" class="envelope-flap-top"></div>
+            <div id="wax-seal" class="wax-seal">
+              <span class="f1-seal-text font-mono">❤️</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accent Stripe at Bottom -->
+    <div class="chequered-stripe"></div>
+  </section>
+
+  <!-- ===================================================================
+       SECTION 2 — SPECIAL LETTER & QUIZ
+       =================================================================== -->
+  <section id="section-2" class="section">
+    <div class="section-container-center">
+      <div class="letter-card-f1">
+        <div class="carbon-header-bar font-mono">
+          <span>DOKUMEN RAHASIA • CONFIDENTIAL</span>
+          <span>SPECIAL BOYFRIEND DAY EDITION</span>
+        </div>
+        <div class="stamp-badge-f1 font-mono">
+          <span class="stamp-title">MY FAVORITE BOY</span>
+          <span class="stamp-date">3 OKTOBER • 💖</span>
+        </div>
+        <span class="section-tag-pill-f1">01 // SURAT SPESIAL • SPECIAL LETTER 💌</span>
+        <h2 class="letter-header-f1">Untuk Pacar Kesayanganku 💖,</h2>
+        <div class="typewriter-box-f1">
+          <span id="typewriter-text"></span>
+          <span class="typewriter-cursor-f1"></span>
+        </div>
+
+        <!-- Relationship Love Quiz Component -->
+        <div class="f1-quiz-container">
+          <div class="quiz-header-bar font-mono">
+            <span>💌 PERTANYAAN CINTA • LOVE CHECKPOINT</span>
+            <span id="quiz-step-tag" class="quiz-step-tag">Q1 / 3</span>
+          </div>
+
+          <!-- Question 1 -->
+          <div id="quiz-q1" class="quiz-question-block">
+            <h3 class="quiz-question-title font-sans">1. Dari semua hal manis di dunia ini, apa hal sederhana dari kamu yang paling sering bikin aku tiba-tiba senyum sendiri? 💓</h3>
+            <div class="quiz-options-grid">
+              <button class="quiz-opt-btn" data-correct="false">
+                <span class="opt-prefix font-mono">A</span>
+                <span>Pas kamu lagi benerin rambut ✨</span>
+              </button>
+              <button class="quiz-opt-btn" data-correct="false">
+                <span class="opt-prefix font-mono">B</span>
+                <span>Pas kamu tiba-tiba pap foto atau kirim chat random 📱</span>
+              </button>
+              <button class="quiz-opt-btn" data-correct="true">
+                <span class="opt-prefix font-mono">C</span>
+                <span>Semua hal tentang kamu, terutama pas kamu senyum manis buat aku! 💖🔥</span>
+              </button>
+              <button class="quiz-opt-btn" data-correct="false">
+                <span class="opt-prefix font-mono">D</span>
+                <span>Pas kamu lagi ngambek lucu 🥺</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Question 2 -->
+          <div id="quiz-q2" class="quiz-question-block" style="display: none;">
+            <h3 class="quiz-question-title font-sans">2. Kalau aku lagi capek, bad mood, atau ngerasa berat sama hariku, apa obat paling manjur yang selalu bikin aku tenang? 🥺</h3>
+            <div class="quiz-options-grid">
+              <button class="quiz-opt-btn" data-correct="false">
+                <span class="opt-prefix font-mono">A</span>
+                <span>Tidur 10 jam nonstop 😴</span>
+              </button>
+              <button class="quiz-opt-btn" data-correct="true">
+                <span class="opt-prefix font-mono">B</span>
+                <span>Pelukan hangat dari kamu + dengerin suara kamu yang lembut 🫂❤️</span>
+              </button>
+              <button class="quiz-opt-btn" data-correct="false">
+                <span class="opt-prefix font-mono">C</span>
+                <span>Makan makanan favorit 🍕</span>
+              </button>
+              <button class="quiz-opt-btn" data-correct="false">
+                <span class="opt-prefix font-mono">D</span>
+                <span>Main game seharian 🎮</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Question 3 -->
+          <div id="quiz-q3" class="quiz-question-block" style="display: none;">
+            <h3 class="quiz-question-title font-sans">3. Kalau kamu nanya seberapa besar rasa sayang dan bersyukurnya aku punya kamu di dalam hidupku... 🏆</h3>
+            <div class="quiz-options-grid">
+              <button class="quiz-opt-btn" data-correct="false">
+                <span class="opt-prefix font-mono">A</span>
+                <span>Lumayan sayang sih 😁</span>
+              </button>
+              <button class="quiz-opt-btn" data-correct="true">
+                <span class="opt-prefix font-mono">B</span>
+                <span>Tak terhingga! Kamu adalah takdir terbaik dan orang paling berharga buat aku selamanya! 👑💖✨</span>
+              </button>
+              <button class="quiz-opt-btn" data-correct="false">
+                <span class="opt-prefix font-mono">C</span>
+                <span>Rahasia dong 😜</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Feedback Box -->
+          <div id="quiz-feedback" class="quiz-feedback-f1 font-sans" style="display: none;"></div>
+        </div>
+
+        <div class="letter-footer font-sans">
+          <p style="font-style: italic; color: #CBD5E1; margin-bottom: 8px;">Ada banyak kenangan manis and sweet stories I want to share with you…</p>
+          <span class="scroll-arrow-f1 font-mono">↓ GULIR KE BAWAH • SCROLL DOWN FOR MORE LOVE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SECTION 3 — OUR BEST MEMORIES TOGETHER
+       =================================================================== -->
+  <section id="section-3" class="section">
+    <div class="section-container-center">
+      <div class="section-header-center">
+        <span class="section-tag-pill-f1">02 // KENANGAN TERINDAH • OUR BEST MEMORIES 📸</span>
+        <h2 class="section-title-f1 font-bebas">MOMEN MANIS BERSAMA MY FAVORITE PERSON</h2>
+        <p class="section-subtitle-f1">Klik setiap foto to read my sweet notes for you 📸💖</p>
+      </div>
+
+      <div class="scrapbook-grid-center">
+        <!-- Polaroid 1 -->
+        <div class="polaroid-card-f1">
+          <div class="tape-decal-f1"></div>
+          <span class="polaroid-num-tag font-mono">MOMENT #01</span>
+          <span class="corner-sticker-f1 font-mono">First Smile 🥺</span>
+          <div class="polaroid-img-wrapper">
+            <img src="public/photos/photo1.jpeg" alt="Memory 1" loading="lazy">
+          </div>
+          <div class="polaroid-caption-f1 font-mono">Momen manis with you.</div>
+        </div>
+
+        <!-- Polaroid 2 -->
+        <div class="polaroid-card-f1">
+          <div class="tape-decal-f1"></div>
+          <span class="polaroid-num-tag font-mono">MOMENT #02</span>
+          <span class="corner-sticker-f1 font-mono">Cutest Boy 👑</span>
+          <div class="polaroid-img-wrapper">
+            <img src="public/photos/photo2.jpeg" alt="Memory 2" loading="lazy">
+          </div>
+          <div class="polaroid-caption-f1 font-mono">Senyuman paling menggemaskan.</div>
+        </div>
+
+        <!-- Polaroid 3 -->
+        <div class="polaroid-card-f1">
+          <div class="tape-decal-f1"></div>
+          <span class="polaroid-num-tag font-mono">MOMENT #03</span>
+          <span class="corner-sticker-f1 font-mono">My Safe Place 🏡</span>
+          <div class="polaroid-img-wrapper">
+            <img src="public/photos/photo3.jpeg" alt="Memory 3" loading="lazy">
+          </div>
+          <div class="polaroid-caption-f1 font-mono">Kenangan manis tak terlupakan.</div>
+        </div>
+
+        <!-- Polaroid 4 -->
+        <div class="polaroid-card-f1">
+          <div class="tape-decal-f1"></div>
+          <span class="polaroid-num-tag font-mono">MOMENT #04</span>
+          <span class="corner-sticker-f1 font-mono">Our Date Night 🍿</span>
+          <div class="polaroid-img-wrapper">
+            <img src="public/photos/photo4.jpeg" alt="Memory 4" loading="lazy">
+          </div>
+          <div class="polaroid-caption-f1 font-mono">Petualangan kecil & date night.</div>
+        </div>
+
+        <!-- Polaroid 5 -->
+        <div class="polaroid-card-f1">
+          <div class="tape-decal-f1"></div>
+          <span class="polaroid-num-tag font-mono">MOMENT #05</span>
+          <span class="corner-sticker-f1 font-mono">Pure Happiness 🥰</span>
+          <div class="polaroid-img-wrapper">
+            <img src="public/photos/photo5.jpeg" alt="Memory 5" loading="lazy">
+          </div>
+          <div class="polaroid-caption-f1 font-mono">Kebahagiaan murni bersama kamu.</div>
+        </div>
+
+        <!-- Polaroid 6 -->
+        <div class="polaroid-card-f1">
+          <div class="tape-decal-f1"></div>
+          <span class="polaroid-num-tag font-mono">MOMENT #06</span>
+          <span class="corner-sticker-f1 font-mono">My Favorite 💖</span>
+          <div class="polaroid-img-wrapper">
+            <img src="public/photos/photo6.jpeg" alt="Memory 6" loading="lazy">
+          </div>
+          <div class="polaroid-caption-f1 font-mono">Paling favorit for & always.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="polaroid-modal" class="modal-overlay">
+    <div class="modal-content-f1">
+      <button id="modal-close" class="modal-close-f1" aria-label="Close modal">✕</button>
+      <img id="modal-img" class="modal-img" src="" alt="Expanded Memory">
+      <h3 id="modal-caption" class="modal-caption-f1 font-bebas"></h3>
+      <p id="modal-subtext" class="modal-subtext-f1"></p>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       SECTION 4 — REASONS WHY I LOVE YOU
+       =================================================================== -->
+  <section id="section-4" class="section">
+    <div class="section-container-center">
+      <div class="section-header-center">
+        <span class="section-tag-pill-f1">03 // ALASAN SAYANG • REASONS WHY I LOVE YOU 💖</span>
+        <h2 class="section-title-f1 font-bebas">KENAPA KAMU SELALU JADI MY FAVORITE PERSON</h2>
+        <p class="section-subtitle-f1">Klik setiap kartu to reveal my secret notes for you 💌</p>
+      </div>
+
+      <div class="reasons-grid-center">
+        <!-- Card 1 -->
+        <div class="reason-card">
+          <div class="reason-card-inner">
+            <div class="reason-card-front-f1">
+              <span class="reason-number font-mono">LOVE NOTE #01</span>
+              <span class="card-icon">💖</span>
+              <h3 class="card-title font-bebas">Your Smile</h3>
+              <span class="card-hint-f1 font-mono">TEKAN UNTUK BUKA 🔄</span>
+            </div>
+            <div class="reason-card-back-f1">
+              <span class="back-watermark font-bebas">01</span>
+              <p>Cara kamu senyum & matamu berbinar itu damage-nya gak ngotak, instantly fixes all my bad moods! 🥰</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="reason-card">
+          <div class="reason-card-inner">
+            <div class="reason-card-front-f1">
+              <span class="reason-number font-mono">LOVE NOTE #02</span>
+              <span class="card-icon">🎧</span>
+              <h3 class="card-title font-bebas">Your Voice</h3>
+              <span class="card-hint-f1 font-mono">TEKAN UNTUK BUKA 🔄</span>
+            </div>
+            <div class="reason-card-back-f1">
+              <span class="back-watermark font-bebas">02</span>
+              <p>Dengerin suara kamu pas bilang 'good night' atau cerita random is literally my favorite sound ever ✨</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="reason-card">
+          <div class="reason-card-inner">
+            <div class="reason-card-front-f1">
+              <span class="reason-number font-mono">LOVE NOTE #03</span>
+              <span class="card-icon">🤪</span>
+              <h3 class="card-title font-bebas">Your Silly Side</h3>
+              <span class="card-hint-f1 font-mono">TEKAN UNTUK BUKA 🔄</span>
+            </div>
+            <div class="reason-card-back-f1">
+              <span class="back-watermark font-bebas">03</span>
+              <p>Kelakuan random & becandaan garing kamu selalu sukses bikin aku ketawa ngakak no matter what 🤣❤️</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="reason-card">
+          <div class="reason-card-inner">
+            <div class="reason-card-front-f1">
+              <span class="reason-number font-mono">LOVE NOTE #04</span>
+              <span class="card-icon">🫶</span>
+              <h3 class="card-title font-bebas">The Way You Care</h3>
+              <span class="card-hint-f1 font-mono">TEKAN UNTUK BUKA 🔄</span>
+            </div>
+            <div class="reason-card-back-f1">
+              <span class="back-watermark font-bebas">04</span>
+              <p>How gently you listen to all keluh kesahku and always make sure aku merasa aman, dijaga, and deeply loved 🥺🫂</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="reason-card">
+          <div class="reason-card-inner">
+            <div class="reason-card-front-f1">
+              <span class="reason-number font-mono">LOVE NOTE #05</span>
+              <span class="card-icon">🌙</span>
+              <h3 class="card-title font-bebas">My Comfort Zone</h3>
+              <span class="card-hint-f1 font-mono">TEKAN UNTUK BUKA 🔄</span>
+            </div>
+            <div class="reason-card-back-f1">
+              <span class="back-watermark font-bebas">05</span>
+              <p>Pas lagi bareng kamu, all my overthinking & worries just melt away. You feel like home to me 🏡❤️</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="reason-card">
+          <div class="reason-card-inner">
+            <div class="reason-card-front-f1">
+              <span class="reason-number font-mono">LOVE NOTE #06</span>
+              <span class="card-icon">✨</span>
+              <h3 class="card-title font-bebas">Simply… You</h3>
+              <span class="card-hint-f1 font-mono">TEKAN UNTUK BUKA 🔄</span>
+            </div>
+            <div class="reason-card-back-f1">
+              <span class="back-watermark font-bebas">06</span>
+              <p>Segala hal tentang kamu, just as you are. Kamu nggak perlu berubah jadi siapa-siapa because you're already perfect to me 💖👑</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SECTION 5 — SPECIAL LOVE TRANSMISSION
+       =================================================================== -->
+  <section id="section-5" class="section">
+    <div class="section-container-center">
+      <div class="section-header-center">
+        <span class="section-tag-pill-f1">04 // PESAN MANIS • SPECIAL MESSAGE FROM MY HEART 🎙️</span>
+        <h2 class="section-title-f1 font-bebas">OPEN WHEN YOU MISS ME 💖</h2>
+      </div>
+
+      <div class="long-letter-container-f1">
+        <div class="carbon-corner-accent top-left"></div>
+        <div class="carbon-corner-accent top-right"></div>
+        <div class="carbon-corner-accent bottom-left"></div>
+        <div class="carbon-corner-accent bottom-right"></div>
+        
+        <div class="radio-header font-mono">[DARI HATI KE HATI]: SPECIAL BOYFRIEND DAY TRANSMISSION</div>
+        <div class="long-letter-content">
+          <p class="letter-paragraph">Happy Boyfriend Day ya sayangku!</p>
+          <p class="letter-paragraph">Thank you so much for being part of my life and bikin hari-hariku terasa so much warmer and brighter.</p>
+          <p class="letter-paragraph">Makasih ya udah selalu sabar sama aku, dengerin semua cerita curhatku, and always holding my hand tight.</p>
+          <p class="letter-paragraph">You might not always realize it, tapi kehadiran kamu itu bener-bener berarti banget for my whole world.</p>
+          <p class="letter-paragraph highlight-glow-f1">“If I could choose one person to stay by my side forever, aku bakal selalu pilih kamu over and over again.”</p>
+          
+          <div class="letter-signature font-sans">
+            With all my love & peluk hangat,<br>
+            <span class="sig-name font-mono">Your #1 Biggest Fan & Partner 💖</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SECTION 6 — MY PROMISE TO YOU
+       =================================================================== -->
+  <section id="section-6" class="section">
+    <div class="section-container-center">
+      <div class="promise-hero-wrapper-f1">
+        <div class="promise-aura-glow-f1"></div>
+        <div class="promise-box-f1">
+          <span class="section-tag-pill-f1">05 // JANJIKU • MY PROMISE TO YOU 💖</span>
+          <div class="quote-mark-icon-f1 font-bebas">“</div>
+          <p id="promise-1" class="promise-text-1 font-sans">And janjiku untuk kamu adalah…</p>
+          <h2 id="promise-2" class="promise-text-2-f1 font-bebas">AKU BAKAL SELALU ADA DI SINI, SUPPORTING YOU & LOVING YOU EVERY SINGLE DAY.</h2>
+          <button id="btn-surprise" class="btn-f1-red" style="margin-top: 24px;">
+            <span>ONE LAST SURPRISE UNTUK KAMU →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SECTION 7 — SPECIAL BOYFRIEND DAY GIFT
+       =================================================================== -->
+  <section id="section-7" class="section">
+    <div class="section-container-center">
+      <div class="section-header-center">
+        <span class="section-tag-pill-f1">06 // HADIAH SPESIAL • BOYFRIEND DAY GIFT 🎁</span>
+        <h2 class="section-title-f1 font-bebas">AKU SIMPAN ONE LAST SURPRISE BUAT KAMU…</h2>
+        <p class="section-subtitle-f1">Tap the gift box untuk buka kejutan spesial kamu 🎁</p>
+      </div>
+
+      <div class="gift-pedestal">
+        <div class="pedestal-glow-f1"></div>
+        <div id="gift-box-wrapper" class="gift-box-wrapper" title="Click to open surprise">
+          <span class="gift-badge-pill-f1 font-mono">UNWRAP GIFT ✨</span>
+          <div class="gift-box">
+            <div class="gift-box-base-f1">
+              <div class="ribbon-v-f1"></div>
+              <div class="ribbon-h-f1"></div>
+            </div>
+            <div class="gift-box-lid-f1">
+              <div class="ribbon-v-f1"></div>
+              <div class="bow-f1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SECTION 8 — FOREVER WITH YOU
+       =================================================================== -->
+  <section id="section-8" class="section">
+    <div class="section-container-center">
+      <div class="section-header-center">
+        <span class="section-tag-pill-f1">07 // SELAMANYA BERSAMA • FOREVER WITH YOU ❤️</span>
+      </div>
+
+      <div id="main-photo-frame" class="main-photo-frame-f1">
+        <div class="frame-corner-f1 top-left"></div>
+        <div class="frame-corner-f1 top-right"></div>
+        <div class="frame-corner-f1 bottom-left"></div>
+        <div class="frame-corner-f1 bottom-right"></div>
+        <div class="frame-plaque-f1 font-mono">MY FAVORITE BOYFRIEND 👑</div>
+
+        <img src="public/photos/photo_main.jpeg" alt="My Favorite Person" loading="lazy">
+      </div>
+
+      <h1 class="final-title-f1 font-bebas">HAPPY BOYFRIEND DAY ❤️</h1>
+      <p class="final-sub-1-f1 font-sans">Makasih ya udah jadi the sweetest boyfriend ever in the world.</p>
+      <p class="final-sub-2-f1 font-sans">Aku sayang banget sama kamu more than words can say! 💖</p>
+
+      <button id="btn-transform-hearts" class="btn-f1-red" style="margin-top: 36px;">
+        <span>RAYAKAN CINTA • CELEBRATE OUR LOVE 💖✨</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       FINAL HEART OVERLAY — ENDING EXPERIENCE
+       =================================================================== -->
+  <div id="final-heart-overlay" class="final-heart-overlay">
+    <div class="big-heart-container">
+      <svg class="big-heart-svg" viewBox="0 0 24 24">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+      <div class="big-heart-text font-mono">HAPPY BOYFRIEND DAY 💖</div>
+    </div>
+    <p class="section-subtitle-f1" style="font-size: 2rem; color: #FFF; text-shadow: 0 0 15px rgba(225, 6, 0, 0.8);">
+      Happy Boyfriend Day, sayangku! You will always be my favorite person in the entire world! ✨
+    </p>
+    <button id="btn-replay" class="replay-btn-f1 font-mono">ULANGI MOMEN • REPLAY EXPERIENCE 💖</button>
+  </div>
+
+  <!-- Custom Script -->
+  <script src="js/script.js"></script>
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

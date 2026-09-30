@@ -1,0 +1,1509 @@
+/* ==========================================================================
+   "Boyfriend Day Grand Prix 🏁" — Formula 1 Racing Edition
+   Dynamic Layout System: Hero Left-Aligned + Balanced Centered Content Sections
+   ========================================================================== */
+
+:root {
+  /* F1 Official Color Palette */
+  --f1-black: #0A0B0E;
+  --f1-dark-card: #141720;
+  --f1-dark-hover: #1E2230;
+  --f1-red: #E10600; /* Official F1 Racing Red */
+  --f1-red-glow: rgba(225, 6, 0, 0.5);
+  --f1-amber: #FFB800; /* F1 Telemetry Amber / Gold */
+  --f1-white: #FFFFFF;
+  --f1-muted: #8D99AE;
+  --f1-subtle: #4A5568;
+
+  /* Fonts */
+  --font-bebas: 'Bebas Neue', sans-serif;
+  --font-oswald: 'Oswald', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Courier New', monospace;
+  --font-script: 'Dancing Script', cursive;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Reset & Base Dark Style */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto;
+  font-size: 16px;
+  overflow-x: hidden;
+  background-color: var(--f1-black);
+  color: var(--f1-white);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body.f1-theme {
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at 70% 30%, #1A1D28 0%, var(--f1-black) 70%);
+}
+
+/* F1 Grid & Track Background Pattern */
+.f1-track-grid-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.04;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Ambient Floating Racing Glows */
+.ambient-glow-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.25;
+  animation: floatGlow 18s ease-in-out infinite alternate;
+}
+
+.glow-red {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--f1-red) 0%, rgba(225, 6, 0, 0) 70%);
+  top: -15%;
+  left: 20%;
+}
+
+.glow-amber {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--f1-amber) 0%, rgba(255, 184, 0, 0) 70%);
+  bottom: 5%;
+  right: -10%;
+  animation-delay: -8s;
+}
+
+.glow-dark {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, var(--f1-red) 0%, rgba(225, 6, 0, 0) 70%);
+  bottom: 30%;
+  left: -10%;
+  animation-delay: -14s;
+}
+
+@keyframes floatGlow {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, 60px) scale(1.1); }
+  100% { transform: translate(-30px, 40px) scale(0.95); }
+}
+
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Typography Utility */
+.font-bebas { font-family: var(--font-bebas); }
+.font-oswald { font-family: var(--font-oswald); }
+.font-sans { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
+.font-script { font-family: var(--font-script); }
+.font-serif { font-family: var(--font-serif); }
+
+/* Common Section Layout */
+.section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 10% 100px 10%;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* Left-Aligned Container for Hero */
+.section-container-left {
+  width: 100%;
+  max-width: 1150px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Centered Container for Content Sections */
+.section-container-center {
+  width: 100%;
+  max-width: 1150px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================================================================
+   1. HERO SECTION (THE GRID F1 EDITION - LEFT ALIGNED LIKE REFERENCE)
+   ========================================================================== */
+.hero-section {
+  justify-content: center;
+  padding-bottom: 120px;
+  align-items: flex-start;
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-content-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+.f1-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.f1-badge-pill {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--f1-red);
+  background: rgba(225, 6, 0, 0.12);
+  border: 1px solid rgba(225, 6, 0, 0.35);
+  padding: 6px 16px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(225, 6, 0, 0.2);
+}
+
+.f1-badge-gold {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--f1-amber);
+  background: rgba(255, 184, 0, 0.1);
+  border: 1px solid rgba(255, 184, 0, 0.3);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.hero-title {
+  font-size: clamp(4.5rem, 9.5vw, 8.5rem);
+  line-height: 0.88;
+  font-family: var(--font-bebas);
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+}
+
+.text-white-f1 {
+  color: #FFFFFF;
+  text-shadow: 3px 4px 0px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.text-racing-red {
+  color: var(--f1-red);
+  text-shadow: 4px 5px 0px rgba(0, 0, 0, 0.9), 0 0 35px rgba(225, 6, 0, 0.6);
+}
+
+.f1-telemetry-bar {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--f1-muted);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.telemetry-item {
+  background: rgba(20, 23, 32, 0.85);
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-quote {
+  font-size: 1.15rem;
+  color: #D1D5DB;
+  max-width: 520px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-f1-red {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 36px;
+  background: var(--f1-red);
+  color: #FFFFFF;
+  font-family: var(--font-oswald);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(225, 6, 0, 0.45);
+  transition: var(--transition-smooth);
+}
+
+.btn-f1-red:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(225, 6, 0, 0.7);
+  background: #FF1E1E;
+}
+
+.btn-f1-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: rgba(20, 23, 32, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 30px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: var(--transition-smooth);
+}
+
+.btn-f1-outline:hover {
+  border-color: var(--f1-red);
+  background: rgba(225, 6, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* 3D F1 Envelope Component */
+.hero-interactive-right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.f1-pit-sticker {
+  position: absolute;
+  top: -40px;
+  right: 10px;
+  padding: 6px 16px;
+  background: rgba(20, 23, 32, 0.95);
+  border: 1px solid var(--f1-red);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  font-size: 0.82rem;
+  color: var(--f1-amber);
+  z-index: 12;
+  animation: floatSticker 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatSticker {
+  0% { transform: translateY(0) rotate(-3deg); }
+  100% { transform: translateY(-10px) rotate(3deg); }
+}
+
+.envelope-wrapper {
+  perspective: 1400px;
+  cursor: pointer;
+  width: 290px;
+  height: 200px;
+  position: relative;
+  z-index: 10;
+  transform-style: preserve-3d;
+  margin-top: 20px;
+}
+
+.envelope-glow-aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 330px;
+  height: 230px;
+  background: radial-gradient(circle, rgba(225, 6, 0, 0.45) 0%, rgba(0, 0, 0, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.envelope {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #141720;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 25px rgba(225, 6, 0, 0.3);
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  border: 1px solid rgba(225, 6, 0, 0.4);
+}
+
+.envelope-inside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #1E2230 0%, #141720 100%);
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.envelope-flap-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 145px solid transparent;
+  border-right: 145px solid transparent;
+  border-top: 115px solid #252B3C;
+  transform-origin: top center;
+  z-index: 5;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+  transition: z-index 0s 0.3s;
+}
+
+.envelope-flap-top.behind { z-index: 1; }
+
+.wax-seal {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #E10600 0%, #800000 100%);
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(225, 6, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+}
+
+.f1-seal-text { font-size: 1.1rem; font-weight: 800; color: #FFF; letter-spacing: 0.1em; }
+
+.envelope-pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border-bottom: 200px solid #1A1E2A;
+  border-left: 145px solid #161A24;
+  border-right: 145px solid #161A24;
+  border-radius: 0 0 12px 12px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.envelope-letter {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  height: 165px;
+  background: #0A0B0E;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(225, 6, 0, 0.4);
+  text-align: center;
+  color: #FFF;
+}
+
+.letter-stamp { font-size: 1.6rem; margin-bottom: 4px; }
+.letter-preview-heading { font-size: 1.4rem; color: #FFF; margin-bottom: 2px; }
+.letter-preview-text { font-size: 0.95rem; color: var(--f1-red); }
+
+/* Chequered Flag Stripe at Bottom */
+.chequered-stripe {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 14px;
+  background-image: repeating-linear-gradient(90deg, #FFFFFF 0, #FFFFFF 14px, #0A0B0E 14px, #0A0B0E 28px);
+  opacity: 0.85;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   2. FIXED NAVIGATION & CONTROLS (F1 TELEMETRY CAPSULE)
+   ========================================================================== */
+.right-nav-capsule {
+  display: none !important;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 20px;
+  color: var(--f1-muted);
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  transition: var(--transition-smooth);
+}
+
+.nav-item:hover { color: #FFFFFF; background: rgba(255, 255, 255, 0.08); }
+.nav-item.active { background: var(--f1-red); color: #FFFFFF; box-shadow: 0 4px 15px rgba(225, 6, 0, 0.5); }
+
+/* Bottom Right Controls */
+.bottom-right-controls {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 100;
+}
+
+.f1-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(14, 16, 22, 0.9);
+  border: 1px solid rgba(225, 6, 0, 0.5);
+  color: #FFFFFF;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.f1-action-btn:hover { background: var(--f1-red); box-shadow: 0 8px 25px rgba(225, 6, 0, 0.6); transform: translateY(-2px); }
+
+.f1-audio-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(14, 16, 22, 0.9);
+  border: 1px solid var(--f1-red);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(225, 6, 0, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.f1-audio-btn:hover { transform: scale(1.08); box-shadow: 0 0 25px rgba(225, 6, 0, 0.7); }
+
+.sound-waves { display: flex; align-items: flex-end; gap: 3px; height: 14px; }
+.sound-waves span { display: block; width: 3px; height: 100%; background: var(--f1-red); border-radius: 3px; transform-origin: bottom; animation: wave 1.2s ease-in-out infinite alternate; animation-play-state: paused; }
+.f1-audio-btn.playing .sound-waves span { animation-play-state: running; }
+
+@keyframes wave { 0% { transform: scaleY(0.3); } 100% { transform: scaleY(1); } }
+
+/* ==========================================================================
+   3. SECTION HEADERS & TAG PILLS (CENTER ALIGNED)
+   ========================================================================== */
+.section-header-center {
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 750px;
+}
+
+.section-tag-pill-f1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--f1-red);
+  background: rgba(225, 6, 0, 0.12);
+  border: 1px solid rgba(225, 6, 0, 0.35);
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.15);
+}
+
+.section-title-f1 {
+  font-size: clamp(2.6rem, 5.5vw, 3.8rem);
+  color: #FFFFFF;
+  margin-bottom: 12px;
+  font-family: var(--font-bebas);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.section-subtitle-f1 {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #E2E8F0;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   4. SECTION 2 — DRIVER BRIEFING (CENTER ALIGNED)
+   ========================================================================== */
+.letter-card-f1 {
+  max-width: 740px;
+  width: 100%;
+  background: rgba(20, 23, 32, 0.9);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 48px 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(225, 6, 0, 0.35);
+  position: relative;
+  text-align: left;
+}
+
+.paperclip-decal {
+  position: absolute;
+  top: -18px;
+  left: 24px;
+  font-size: 2.2rem;
+  z-index: 15;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+}
+
+.carbon-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  color: var(--f1-muted);
+  letter-spacing: 0.12em;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 130px; /* Leave clean clearance for stamp badge */
+}
+
+.stamp-badge-f1 {
+  position: absolute;
+  top: -16px;
+  right: 28px;
+  border: 2px dashed var(--f1-red);
+  padding: 6px 14px;
+  border-radius: 6px;
+  text-align: center;
+  transform: rotate(8deg);
+  background: rgba(10, 11, 14, 0.95);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+.stamp-title { display: block; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.15em; color: #FFF; }
+.stamp-date { display: block; font-size: 0.6rem; color: var(--f1-red); font-weight: 700; }
+
+.letter-header-f1 { font-family: var(--font-serif); font-size: 2.6rem; color: #FFF; margin-bottom: 20px; }
+
+.typewriter-box-f1 {
+  min-height: 140px;
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #E2E8F0;
+  position: relative;
+}
+
+.typewriter-cursor-f1 {
+  display: inline-block;
+  width: 2px;
+  height: 1.2rem;
+  background-color: var(--f1-red);
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.scroll-arrow-f1 {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  animation: bounce 2s infinite;
+  display: inline-block;
+  color: var(--f1-red);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(10px); }
+  60% { transform: translateY(5px); }
+}
+
+/* F1 Driver Qualifying Quiz (Section 2) */
+.f1-quiz-container {
+  margin-top: 28px;
+  margin-bottom: 24px;
+  background: rgba(10, 11, 14, 0.75);
+  border: 1px solid rgba(225, 6, 0, 0.4);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  text-align: left;
+}
+
+.quiz-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--f1-amber);
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+  padding-bottom: 8px;
+}
+
+.quiz-step-tag {
+  background: rgba(255, 184, 0, 0.15);
+  border: 1px solid rgba(255, 184, 0, 0.4);
+  padding: 3px 10px;
+  border-radius: 12px;
+  color: var(--f1-amber);
+  font-weight: 700;
+}
+
+.quiz-question-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.quiz-options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 600px) {
+  .quiz-options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.quiz-opt-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: #1A1D28;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  color: #E2E8F0;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.quiz-opt-btn:hover {
+  background: rgba(225, 6, 0, 0.15);
+  border-color: var(--f1-red);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.quiz-opt-btn .opt-prefix {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: var(--f1-amber);
+  flex-shrink: 0;
+}
+
+.quiz-opt-btn.correct {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #10B981 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.4);
+}
+
+.quiz-opt-btn.correct .opt-prefix {
+  background: #10B981;
+  color: #FFFFFF;
+}
+
+.quiz-opt-btn.wrong {
+  background: rgba(225, 6, 0, 0.25) !important;
+  border-color: var(--f1-red) !important;
+  color: #F87171 !important;
+  animation: shakeOpt 0.4s ease;
+}
+
+.quiz-opt-btn.wrong .opt-prefix {
+  background: var(--f1-red);
+  color: #FFFFFF;
+}
+
+@keyframes shakeOpt {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.quiz-feedback-f1 {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.quiz-feedback-f1.success {
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid #10B981;
+  color: #34D399;
+}
+
+.quiz-feedback-f1.error {
+  background: rgba(225, 6, 0, 0.18);
+  border: 1px solid var(--f1-red);
+  color: #F87171;
+}
+
+/* ==========================================================================
+   5. SECTION 3 — SCRAPBOOK POLAROIDS (CENTER ALIGNED GRID)
+   ========================================================================== */
+.scrapbook-grid-center {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  width: 100%;
+}
+
+.polaroid-card-f1 {
+  background: #141720;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 16px 16px 24px 16px;
+  border-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.polaroid-card-f1:hover {
+  transform: scale(1.04) translateY(-6px) !important;
+  box-shadow: 0 20px 45px rgba(225, 6, 0, 0.35);
+  border-color: var(--f1-red);
+  z-index: 20;
+}
+
+.tape-decal-f1 {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 20px;
+  background: rgba(225, 6, 0, 0.4);
+  backdrop-filter: blur(4px);
+  border-radius: 4px;
+}
+
+.polaroid-num-tag { position: absolute; bottom: 12px; left: 16px; font-size: 0.72rem; font-weight: 700; color: var(--f1-muted); letter-spacing: 0.08em; }
+
+.corner-sticker-f1 {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(10, 11, 14, 0.95);
+  border: 1px solid var(--f1-red);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: #FFF;
+  z-index: 5;
+}
+
+.polaroid-img-wrapper {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #0A0B0E;
+}
+
+.polaroid-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.polaroid-card-f1:hover .polaroid-img-wrapper img { transform: scale(1.06); }
+
+.polaroid-caption-f1 { margin-top: 14px; text-align: center; font-size: 0.9rem; letter-spacing: 0.1em; color: #FFF; }
+
+/* Lightbox Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  padding: 24px;
+}
+
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+.modal-content-f1 {
+  background: #141720;
+  padding: 28px;
+  border-radius: 16px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+  position: relative;
+  border: 1px solid rgba(225, 6, 0, 0.5);
+}
+
+.modal-close-f1 {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(225, 6, 0, 0.2);
+  border: 1px solid var(--f1-red);
+  color: #FFF;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-img { width: 100%; max-height: 360px; object-fit: cover; border-radius: 10px; margin-bottom: 16px; }
+.modal-caption-f1 { font-size: 2rem; color: #FFF; text-align: center; margin-bottom: 6px; }
+.modal-subtext-f1 { text-align: center; color: var(--f1-muted); font-size: 1rem; }
+
+/* ==========================================================================
+   6. SECTION 4 — REASONS I LOVE YOU (TELEMETRY GRID CENTER ALIGNED)
+   ========================================================================== */
+.reasons-grid-center {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 28px;
+  width: 100%;
+}
+
+.reason-card { perspective: 1000px; height: 200px; cursor: pointer; }
+.reason-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; border-radius: 16px; }
+.reason-card.flipped .reason-card-inner { transform: rotateY(180deg); }
+
+.reason-card-front-f1, .reason-card-back-f1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.reason-card-front-f1 { background: #141720; color: #FFF; }
+.reason-card-front-f1:hover { border-color: var(--f1-red); box-shadow: 0 20px 40px rgba(225, 6, 0, 0.3); }
+
+.card-icon { font-size: 2.2rem; margin-bottom: 8px; }
+.card-title { font-size: 1.5rem; letter-spacing: 0.05em; }
+.card-hint-f1 { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--f1-red); margin-top: 8px; }
+
+.reason-card-back-f1 {
+  background: linear-gradient(135deg, #1E2230 0%, #0A0B0E 100%);
+  color: #FAF8F5;
+  transform: rotateY(180deg);
+  border-color: var(--f1-red);
+  box-shadow: 0 0 25px rgba(225, 6, 0, 0.4);
+}
+
+.reason-card-back-f1 p { font-family: var(--font-sans); font-size: 1.08rem; line-height: 1.65; color: #F8FAFC; font-weight: 500; }
+
+.reason-number { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--f1-red); font-weight: 800; margin-bottom: 4px; }
+.back-watermark { position: absolute; top: 10px; right: 14px; font-size: 1.8rem; opacity: 0.15; color: var(--f1-red); }
+
+/* ==========================================================================
+   7. SECTION 5 — TEAM RADIO (LOVE LETTER - CENTER ALIGNED)
+   ========================================================================== */
+.long-letter-container-f1 {
+  max-width: 800px;
+  width: 100%;
+  background: #141720;
+  border-radius: 20px;
+  padding: 50px 44px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), inset 0 0 60px rgba(225, 6, 0, 0.1);
+  border: 1px solid rgba(225, 6, 0, 0.4);
+  position: relative;
+  text-align: left;
+}
+
+.radio-header {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--f1-amber);
+  margin-bottom: 24px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+  padding-bottom: 8px;
+}
+
+.carbon-corner-accent {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: var(--f1-red);
+  border-style: solid;
+  opacity: 0.7;
+}
+.carbon-corner-accent.top-left { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
+.carbon-corner-accent.top-right { top: 16px; right: 16px; border-width: 2px 2px 0 0; }
+.carbon-corner-accent.bottom-left { bottom: 16px; left: 16px; border-width: 0 0 2px 2px; }
+.carbon-corner-accent.bottom-right { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
+
+.letter-paragraph {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #F1F5F9;
+  font-weight: 500;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.letter-paragraph.visible { opacity: 1; transform: translateY(0); }
+
+.highlight-glow-f1 {
+  color: #FF4D4D;
+  font-weight: 700;
+  font-size: 1.25rem;
+  font-style: italic;
+  text-shadow: 0 0 15px rgba(225, 6, 0, 0.6);
+}
+
+.letter-signature { margin-top: 36px; text-align: right; font-family: var(--font-sans); font-size: 1.1rem; color: #FFF; font-weight: 500; }
+.sig-name { font-size: 1rem; color: var(--f1-red); letter-spacing: 0.1em; }
+
+/* ==========================================================================
+   8. SECTION 6 — PODIUM PROMISE (CENTER ALIGNED HERO CARD)
+   ========================================================================== */
+.promise-hero-wrapper-f1 { position: relative; width: 100%; max-width: 800px; }
+
+.promise-aura-glow-f1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(225, 6, 0, 0.25) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.promise-box-f1 {
+  background: #141720;
+  border: 1px solid rgba(225, 6, 0, 0.4);
+  padding: 48px 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+  text-align: center;
+}
+
+.quote-mark-icon-f1 { font-size: 4rem; color: var(--f1-red); line-height: 0.8; margin-bottom: -10px; opacity: 0.8; }
+.promise-text-1 { font-family: var(--font-sans); font-size: 1.35rem; font-weight: 600; font-style: italic; color: var(--f1-red); margin-bottom: 14px; opacity: 0; letter-spacing: 0.03em; }
+.promise-text-2-f1 { font-size: clamp(2.4rem, 5vw, 3.4rem); color: #FFF; line-height: 1.2; margin-bottom: 32px; opacity: 0; text-shadow: 0 0 20px rgba(225, 6, 0, 0.5); }
+
+/* ==========================================================================
+   9. SECTION 7 — CHAMPION'S TROPHY (GIFT BOX CENTER ALIGNED)
+   ========================================================================== */
+.gift-pedestal { position: relative; display: inline-block; margin-top: 20px; }
+
+.pedestal-glow-f1 {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 80px;
+  background: radial-gradient(ellipse at center, rgba(225, 6, 0, 0.5) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(15px);
+  z-index: 1;
+}
+
+.gift-badge-pill-f1 {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--f1-red);
+  color: #FFF;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  box-shadow: 0 6px 15px rgba(225, 6, 0, 0.4);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.gift-box-wrapper { position: relative; width: 210px; height: 210px; cursor: pointer; perspective: 1000px; }
+.gift-box { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; }
+.gift-box-base-f1 { position: absolute; bottom: 0; width: 100%; height: 160px; background: #141720; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); border: 1px solid rgba(225, 6, 0, 0.4); }
+.gift-box-lid-f1 { position: absolute; top: 10px; left: -8px; width: 226px; height: 48px; background: #1E2230; border-radius: 8px; box-shadow: 0 8px 15px rgba(0,0,0,0.5); z-index: 5; transition: transform 0.8s ease, opacity 0.5s ease; border: 1px solid rgba(225, 6, 0, 0.4); }
+
+.ribbon-v-f1 { position: absolute; left: 50%; transform: translateX(-50%); width: 34px; height: 100%; background: var(--f1-red); }
+.ribbon-h-f1 { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; height: 34px; background: var(--f1-red); }
+
+.bow-f1 { position: absolute; top: -26px; left: 50%; transform: translateX(-50%); width: 60px; height: 40px; background: var(--f1-red); border-radius: 50% 50% 0 0; }
+.bow-f1::before, .bow-f1::after { content: ''; position: absolute; top: 6px; width: 26px; height: 26px; background: #900000; border-radius: 50%; }
+.bow-f1::before { left: -13px; }
+.bow-f1::after { right: -13px; }
+
+.gift-box-wrapper.open .gift-box-lid-f1 { transform: translateY(-160px) rotate(-20deg) scale(0.9); opacity: 0.2; }
+
+/* ==========================================================================
+   10. SECTION 8 — P1 FINISH FOREVER & OVERLAY (CENTER ALIGNED)
+   ========================================================================== */
+.main-photo-frame-f1 {
+  width: 320px;
+  height: 380px;
+  background: #141720;
+  padding: 16px 16px 48px 16px;
+  border-radius: 12px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7), 0 0 35px rgba(225, 6, 0, 0.4);
+  margin: 0 auto 36px auto;
+  position: relative;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
+  border: 1px solid rgba(225, 6, 0, 0.5);
+}
+
+.main-photo-frame-f1.visible { transform: scale(1); opacity: 1; }
+.main-photo-frame-f1 img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+
+.frame-corner-f1 { position: absolute; width: 20px; height: 20px; border-color: var(--f1-red); border-style: solid; z-index: 5; }
+.frame-corner-f1.top-left { top: 8px; left: 8px; border-width: 3px 0 0 3px; }
+.frame-corner-f1.top-right { top: 8px; right: 8px; border-width: 3px 3px 0 0; }
+.frame-corner-f1.bottom-left { bottom: 8px; left: 8px; border-width: 0 0 3px 3px; }
+.frame-corner-f1.bottom-right { bottom: 8px; right: 8px; border-width: 0 3px 3px 0; }
+
+.frame-plaque-f1 { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); background: #0A0B0E; border: 1px solid var(--f1-red); padding: 4px 20px; border-radius: 20px; font-size: 0.85rem; letter-spacing: 0.12em; color: #FFF; box-shadow: 0 6px 15px rgba(0,0,0,0.6); white-space: nowrap; z-index: 10; }
+
+.final-title-f1 { font-size: clamp(3rem, 6vw, 4.5rem); color: #FFF; margin-bottom: 12px; text-shadow: 0 0 20px rgba(225, 6, 0, 0.6); text-align: center; }
+.final-sub-1-f1, .final-sub-2-f1 { font-family: var(--font-sans); font-size: 1.2rem; font-weight: 500; color: #CBD5E1; margin-bottom: 8px; text-align: center; }
+
+/* Final Overlay */
+.final-heart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, #1E2230 0%, #0A0B0E 100%);
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+  padding: 24px;
+  text-align: center;
+  color: #FFF;
+}
+
+.final-heart-overlay.active { opacity: 1; pointer-events: auto; }
+
+.big-heart-container { width: 260px; height: 260px; position: relative; display: flex; align-items: center; justify-content: center; animation: pulse-heart 2s ease-in-out infinite alternate; margin-bottom: 28px; }
+.big-heart-svg { width: 100%; height: 100%; fill: var(--f1-red); filter: drop-shadow(0 15px 35px rgba(225, 6, 0, 0.7)); }
+.big-heart-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; font-size: 1.1rem; letter-spacing: 0.1em; color: #FFF; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+
+@keyframes pulse-heart {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.06); }
+}
+
+.replay-btn-f1 { margin-top: 24px; background: var(--f1-red); color: #FFF; border: none; padding: 12px 30px; border-radius: 30px; font-size: 0.85rem; letter-spacing: 0.12em; font-weight: 700; cursor: pointer; transition: var(--transition-smooth); box-shadow: 0 8px 20px rgba(225, 6, 0, 0.4); }
+.replay-btn-f1:hover { transform: scale(1.05); background: #FF1E1E; }
+
+/* ==========================================================================
+   11. COMPREHENSIVE RESPONSIVE DESIGN SYSTEM (MOBILE & TABLET OPTIMIZED)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  /* Section Padding & Spacing */
+  .section {
+    padding: 60px 18px 90px 18px;
+    min-height: auto;
+  }
+
+  .section-container-left,
+  .section-container-center {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Hero Section Mobile Layout */
+  .hero-section {
+    padding-top: 40px;
+    padding-bottom: 90px;
+  }
+
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .hero-content-left {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .f1-badge-row {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .f1-badge-pill, .f1-badge-gold {
+    font-size: 0.7rem;
+    padding: 5px 12px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 11vw, 4.2rem);
+    text-align: center;
+    line-height: 1.05;
+    margin-bottom: 14px;
+  }
+
+  .f1-telemetry-bar {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 0.72rem;
+    width: 100%;
+  }
+
+  .hero-quote {
+    text-align: center;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin: 18px auto 24px auto;
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    gap: 12px;
+    margin: 0 auto;
+  }
+
+  .btn-f1-red, .btn-f1-outline {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 0.82rem;
+  }
+
+  .hero-interactive-right {
+    width: 100%;
+    max-width: 330px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .f1-pit-sticker {
+    font-size: 0.75rem;
+    margin-bottom: 16px;
+  }
+
+  .envelope-wrapper {
+    width: 100%;
+    max-width: 320px;
+    height: 210px;
+  }
+
+  /* Fixed Navigation — Bottom Floating Pill Bar on Mobile */
+
+
+  /* Audio Control Button on Top Right */
+  .bottom-right-controls {
+    top: 16px;
+    right: 16px;
+    bottom: auto;
+    z-index: 1400;
+  }
+
+  .f1-audio-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Section Titles & Cards */
+  .section-title-f1 {
+    font-size: clamp(2.2rem, 8.5vw, 3.2rem);
+  }
+
+  .section-subtitle-f1 {
+    font-size: 0.95rem;
+  }
+
+  .letter-card-f1 {
+    padding: 32px 20px 24px 20px;
+    border-radius: 16px;
+  }
+
+  .carbon-header-bar {
+    padding-right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 0.68rem;
+  }
+
+  .stamp-badge-f1 {
+    position: relative;
+    top: 0;
+    right: 0;
+    margin: 0 0 16px 0;
+    transform: none;
+    display: inline-block;
+  }
+
+  .letter-header-f1 {
+    font-size: 2rem;
+  }
+
+  .typewriter-box-f1 {
+    font-size: 1rem;
+    line-height: 1.65;
+    min-height: 160px;
+  }
+
+  /* Quiz Layout Mobile */
+  .f1-quiz-container {
+    padding: 18px 14px;
+    margin-top: 20px;
+  }
+
+  .quiz-question-title {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .quiz-options-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .quiz-opt-btn {
+    padding: 12px;
+    font-size: 0.88rem;
+  }
+
+  /* Photo & Reasons Grids */
+  .scrapbook-grid-center {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .polaroid-card-f1 {
+    padding: 12px 12px 20px 12px;
+  }
+
+  .polaroid-img-wrapper {
+    height: 220px;
+  }
+
+  .reasons-grid-center {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+  }
+
+  .reason-card {
+    height: 190px;
+  }
+
+  .reason-card-back-f1 p {
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  /* Long Letter Container */
+  .long-letter-container-f1 {
+    padding: 32px 20px;
+    border-radius: 16px;
+  }
+
+  .letter-paragraph {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .highlight-glow-f1 {
+    font-size: 1.1rem;
+  }
+
+  /* Promise Box */
+  .promise-box-f1 {
+    padding: 32px 20px;
+    border-radius: 16px;
+  }
+
+  .promise-text-2-f1 {
+    font-size: clamp(1.8rem, 7vw, 2.6rem);
+  }
+
+  /* Photo Frame Finish */
+  .main-photo-frame-f1 {
+    width: 100%;
+    max-width: 290px;
+    height: 350px;
+  }
+
+  .final-title-f1 {
+    font-size: clamp(2.4rem, 8vw, 3.8rem);
+  }
+
+  .final-sub-1-f1, .final-sub-2-f1 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 50px 14px 85px 14px;
+  }
+
+  .hero-title {
+    font-size: 2.4rem;
+  }
+
+  .envelope-wrapper {
+    height: 190px;
+  }
+
+  .scrapbook-grid-center,
+  .reasons-grid-center {
+    grid-template-columns: 1fr;
+  }
+
+  .big-heart-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .big-heart-text {
+    font-size: 0.9rem;
+  }
+}
+
+
